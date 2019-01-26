@@ -2,7 +2,7 @@
 
 public class Player : MonoBehaviour
 {
-	public State state { get; private set;  }
+	public State state = State.FLYING;
 	public KeyCode leftInput, rightInput, upInput, downInput;
 	public float flapPower = 10;
 	public float swoopPower = 10;
@@ -10,21 +10,23 @@ public class Player : MonoBehaviour
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1; 
 	public Transform beakObject;
-	private Animator localAnimator;
 	public bool isFacingLeft;
 	public SpriteRenderer localRenderer;
+	private Animator localAnimator;
 	private Rigidbody2D localRigidBody;
-	private float stunEndTime;
 	private NestPiece currentNestPiece;
+	private float stunEndTime;
 
 	public enum State
 	{
-		IDLE, MOVING, STUNNED
+		IDLE, WALKING, FLYING, STUNNED
 	};
 
 	private void Start () 
 	{
 		localRigidBody = GetComponent<Rigidbody2D>();
+
+		Flip(isFacingLeft);
 	}
 	
 	private void Update()
@@ -32,8 +34,7 @@ public class Player : MonoBehaviour
 		switch (state)
 		{
 			case State.IDLE:
-				break;
-			case State.MOVING:
+			case State.FLYING:
 				ApplyInput();
 				break;
 			case State.STUNNED:
@@ -47,29 +48,20 @@ public class Player : MonoBehaviour
 
 	private void ApplyInput ()
 	{
-		if (Input.GetKey(leftInput))
+		bool isPressingLeft = Input.GetKey(leftInput);
+		bool isPressingRight = Input.GetKey(rightInput);
+
+		if (isPressingLeft || isPressingRight)
 		{
 			MoveForward();
 
-			if (!isFacingLeft)
+			if ((isPressingLeft && !isFacingLeft) || (isPressingRight && isFacingLeft))
 			{
-				// FLIP ANIMATION LEFT
-
-				isFacingLeft = true;
+				isFacingLeft = !isFacingLeft;
+				Flip(isFacingLeft);
 			}
 		}
-		else if (Input.GetKey(rightInput))
-		{
-			MoveForward();
-
-			if (isFacingLeft)
-			{
-				// FLIP ANIMATION RIGHT
-
-				isFacingLeft = false;
-			}
-		}
-
+		               
 		if (Input.GetKeyDown(upInput))
 		{
 			Flap();
@@ -78,6 +70,11 @@ public class Player : MonoBehaviour
 		{
 			Swoop();
 		}
+	}
+
+	private void ApplyFlapInput()
+	{
+		
 	}
 
 	private void Flap ()
@@ -115,7 +112,7 @@ public class Player : MonoBehaviour
 	{
 		// SWITCH TO FLAP ANIMATION
 
-		SetState(State.MOVING);
+		SetState(State.FLYING);
 	}
 
 	private void MoveForward ()
@@ -125,9 +122,15 @@ public class Player : MonoBehaviour
 		localRigidBody.AddForce(force, ForceMode2D.Force);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void Flip (bool isLeft)
 	{
-		if (state == State.MOVING)
+		float newScaleX = Mathf.Abs(localRenderer.transform.localScale.x) * (isLeft ? -1 : 1);
+		localRenderer.transform.localScale = new Vector2(newScaleX, localRenderer.transform.localScale.y);
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (state == State.FLYING || state == State.IDLE)
 		{
 			switch (collision.collider.gameObject.tag)
 			{
@@ -144,11 +147,14 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void HandlePlayerCollision (Collision collision)
+	private void HandlePlayerCollision (Collision2D collision)
 	{
 		Player otherPlayer = collision.collider.gameObject.GetComponent<Player>();
 
-		if (otherPlayer.transform.position.y > transform.position.y)
+		if (otherPlayer != null 
+		    && otherPlayer.state == State.FLYING 
+		    && state == State.FLYING
+		    && otherPlayer.transform.position.y > transform.position.y)
 		{
 			SetState(State.STUNNED);
 		}
@@ -170,10 +176,10 @@ public class Player : MonoBehaviour
 		state = newState;
 	}
 
-	private void PickupNestPiece (Collision collision)
+	private void PickupNestPiece (Collision2D collision)
 	{
 		NestPiece targetPiece = collision.collider.gameObject.GetComponent<NestPiece>();
-
+		Debug.Log(targetPiece);
 		if (targetPiece != null && currentNestPiece == null)
 		{
 			targetPiece.SetHeld(beakObject);

@@ -9,7 +9,8 @@ public class NestPiece : MonoBehaviour
 
 	private void Start()
 	{
-		localCollider = transform.GetComponent<Collider2D>();
+		localCollider = GetComponent<Collider2D>();
+		localRigidBody = GetComponent<Rigidbody2D>();
 	}
 
 	public void SetHeld (Transform holder)
@@ -25,6 +26,7 @@ public class NestPiece : MonoBehaviour
 
 		// REMOVE PHYSICS
 		localRigidBody.isKinematic = true;
+		localRigidBody.velocity = Vector2.zero;
 	}
 
 	public void IsDropped ()
