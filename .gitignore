@@ -1,0 +1,49 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+obj/
+UnityGenerated/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.csproj.meta
+*.pidb
+*.suo
+*.sln
+*.sln.meta
+*.user
+*.unityproj
+*.booproj
+*.blend1
+*.blend2
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+#Icon?
+ehthumbs.db
+Thumbs.db
+# ===== #
+# Other #
+# ===== #
+build
+Builds
+Assets/AstarPathfindingProject/
+*.blend1
+*.blend2
+*.blend1.meta
+*.blend2.meta
+.vs/
