@@ -829,7 +829,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: By Michael Consoli, Kirsten Sugar and Rebecca Bennett for the 2019 Global
+  m_Text: By Michael Consoli, Kirsten Sugar and Rebecca Benett for the 2019 Global
     Game Jam
 --- !u!222 &1713033556
 CanvasRenderer:
