@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
-	private Animator localAnimator;
+	private const int levelExtents = 7;
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 				}
 				break;
 		}
+
+		WrapWalls();
 	}
 
 	private void ApplyInput ()
@@ -59,10 +61,18 @@ public class Player : MonoBehaviour
 		{
 			MoveForward();
 
-			if ((isPressingLeft && !isFacingLeft) || (isPressingRight && isFacingLeft))
+			if (isPressingLeft)
 			{
-				isFacingLeft = !isFacingLeft;
-				Flip(isFacingLeft);
+				if (!isFacingLeft)
+				{
+					isFacingLeft = true;
+					Flip(true);
+				}
+			}
+			else if (isPressingRight && isFacingLeft)
+			{
+				isFacingLeft = false;
+				Flip(false);
 			}
 		}
 		               
@@ -222,8 +232,20 @@ public class Player : MonoBehaviour
 			}
 
 			// DELETE NEST PIECE
-			Destroy(currentNestPiece);
+			Destroy(currentNestPiece.gameObject);
 			currentNestPiece = null;
+		}
+	}
+
+	private void WrapWalls ()
+	{
+		if (transform.position.x < -levelExtents)
+		{
+			transform.position = new Vector2(levelExtents - 1, transform.position.y);
+		}
+		else if (transform.position.x > levelExtents)
+		{
+			transform.position = new Vector2(-levelExtents + 1, transform.position.y);
 		}
 	}
 }
