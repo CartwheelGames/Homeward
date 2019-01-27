@@ -15,12 +15,18 @@ public class Nest : MonoBehaviour
 	public void SetProgress (float progress) 
 	{
 		// SET IMAGE OF PROGRESS BASED ON PROGRESS
-
-		if (progressSprites.Length > 0)
+		int spriteCount = progressSprites.Length;
+		if (spriteCount > 0)
 		{
-			int index = progress <= Mathf.Epsilon ? 0 : Mathf.FloorToInt(progressSprites.Length * progress);
-
-			spriteRenderer.sprite = progressSprites[index];
+			int index = progress < Mathf.Epsilon ? 0 : Mathf.FloorToInt(spriteCount * progress);
+			if (index < spriteCount)
+			{
+				spriteRenderer.sprite = progressSprites[index];
+			}
+			else
+			{
+				spriteRenderer.sprite = progressSprites[spriteCount - 1];
+			}
 		}
 	}
 }

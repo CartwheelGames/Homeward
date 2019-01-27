@@ -157,7 +157,7 @@ MonoBehaviour:
   swoopPower: 200
   flyingPower: 200
   walkingPower: 90
-  stunBouncePower: 100
+  stunBouncePower: 200
   flapCoolDown: 0.1
   stunnedDuration: 1
   isFacingLeft: 0

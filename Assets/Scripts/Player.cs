@@ -139,7 +139,14 @@ public class Player : MonoBehaviour
 	private void StopStun()
 	{
 		SetSprite(flapSprite1);
-		SetState(State.FLYING);
+		if (isGrounded)
+		{
+			SetState(State.IDLE);
+		}
+		else
+		{
+			SetState(State.FLYING);
+		}
 	}
 
 	private void MoveForward()
