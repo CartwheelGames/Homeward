@@ -2,7 +2,8 @@
 
 public class NestPieceSpawner : MonoBehaviour 
 {
-	[Range(1, 10)] public int maxOnScreen = 1;
+	[Range(1, 10)]
+	public int maxOnScreen = 1;
 	public GameObject nestPiecePrefab;
 	public const float spawnWidth = 5;
 	public float spawnIntervalMinimum = 1;
