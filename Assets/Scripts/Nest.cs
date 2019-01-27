@@ -18,13 +18,8 @@ public class Nest : MonoBehaviour
 
 		if (progressSprites.Length > 0)
 		{
-			Debug.Log(Mathf.Epsilon);
-			Debug.Log(progressSprites.Length);
-			Debug.Log(progress);
-
 			int index = progress <= Mathf.Epsilon ? 0 : Mathf.FloorToInt(progressSprites.Length * progress);
 
-			Debug.Log(progress);
 			spriteRenderer.sprite = progressSprites[index];
 		}
 	}

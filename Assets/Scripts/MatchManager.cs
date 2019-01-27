@@ -40,7 +40,8 @@ public class MatchManager : MonoBehaviour
 	private void OnPlayerScored(Player player)
 	{
 		// UPDATE NEST VISUALS
-		player.nest.GetComponent<Nest>().SetProgress(player.score / maxScore);
+		float progress = (float)player.score / maxScore;
+		player.nest.GetComponent<Nest>().SetProgress(progress);
 
 		int playerOneScore = playerOne != null ? playerOne.score : 0;
 		int playerTwoScore = playerTwo != null ? playerTwo.score : 0;
