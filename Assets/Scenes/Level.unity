@@ -727,6 +727,50 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: dd5180e08647f4e0d8111a8bf7391ea4, type: 2}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: -0.52568614
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5256861
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.5256861
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114829371541415608, guid: a47c8374cc52542809376b93442f4b0c,
+        type: 2}
+      propertyPath: progressSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: b9241a675eadd3f4092395c107d1873f,
+        type: 3}
+    - target: {fileID: 114829371541415608, guid: a47c8374cc52542809376b93442f4b0c,
+        type: 2}
+      propertyPath: progressSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 06cf95af587904f4695dbbf46b0a2a14,
+        type: 3}
+    - target: {fileID: 114829371541415608, guid: a47c8374cc52542809376b93442f4b0c,
+        type: 2}
+      propertyPath: progressSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 51132cd6107bdc545b67ba1680e1594a,
+        type: 3}
+    - target: {fileID: 114829371541415608, guid: a47c8374cc52542809376b93442f4b0c,
+        type: 2}
+      propertyPath: progressSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7631d2ee2e342b04082e7727e69054ce,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
   m_IsPrefabParent: 0
@@ -1617,6 +1661,26 @@ Prefab:
       propertyPath: m_Name
       value: Left Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5256861
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5256861
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.5256861
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598414598256286, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a47c8374cc52542809376b93442f4b0c, type: 2}
   m_IsPrefabParent: 0
@@ -2147,8 +2211,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2072288644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 4}
-  m_LocalScale: {x: 32, y: 26.211895, z: 1}
+  m_LocalPosition: {x: -0.1, y: 1.3, z: 4}
+  m_LocalScale: {x: 0.58278775, y: 0.58278775, z: 0.58278775}
   m_Children: []
   m_Father: {fileID: 1165065771}
   m_RootOrder: 0
@@ -2185,7 +2249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7b5927c4353ea91448b1e49faae1b2c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36047a047e03bd44ea20bdf577082375, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
