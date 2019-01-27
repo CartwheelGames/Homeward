@@ -153,8 +153,8 @@ MonoBehaviour:
   upInput: 119
   downInput: 115
   score: 0
-  flapPower: 200
-  swoopPower: 600
+  flapPower: 75
+  swoopPower: 200
   flyingPower: 200
   walkingPower: 90
   flapCoolDown: 0.1

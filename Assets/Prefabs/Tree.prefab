@@ -54,9 +54,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4026831154633824}
   - component: {fileID: 50186048492432458}
-  - component: {fileID: 61922795189518932}
   - component: {fileID: 251599699202143584}
   - component: {fileID: 212216663766347220}
+  - component: {fileID: 68266329394254876}
   m_Layer: 0
   m_Name: Ledge
   m_TagString: ground
@@ -140,8 +140,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.080000006
---- !u!61 &61922795189518932
-BoxCollider2D:
+--- !u!68 &68266329394254876
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -153,18 +153,10 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.32, y: -0.0000011920929}
+  - {x: 0.32, y: -0.0000011920929}
 --- !u!114 &114544068153962170
 MonoBehaviour:
   m_ObjectHideFlags: 1

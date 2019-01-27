@@ -39,6 +39,7 @@ public class NestPiece : MonoBehaviour
 		// REMOVE PHYSICS
 		localRigidBody.isKinematic = true;
 		localRigidBody.velocity = Vector2.zero;
+		localRigidBody.angularVelocity = 0;
 	}
 
 	public void IsDropped()

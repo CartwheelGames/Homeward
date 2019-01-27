@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
+	private float flapEndTime;
 
 	public enum State
 	{
@@ -76,27 +77,28 @@ public class Player : MonoBehaviour
 
 	private void FlyUpdate()
 	{
-		if (Input.GetKeyDown(upInput))
+		if (Time.time > flapEndTime)
 		{
-			Flap();
-		}
-		else if (Input.GetKeyDown(downInput))
-		{
-			Swoop();
+			SetSprite(flapSprite1);
+			if (Input.GetKeyDown(upInput))
+			{
+				Flap();
+			}
+			else if (Input.GetKeyDown(downInput))
+			{
+				Swoop();
+			}
 		}
 	}
 
 	private void Flap()
 	{
-		Vector2 force = Vector2.up * flapPower;
 
+		Vector2 force = Vector2.up * flapPower;
 		MoveForward();
-		if (localRenderer != null)
-		{
-			Sprite nextSprite = localRenderer.sprite == flapSprite1 ? flapSprite2 : flapSprite1;
-			SetSprite(nextSprite);
-		}
+		SetSprite(flapSprite2);
 		localRigidBody.AddForce(force);
+		flapEndTime = Time.time + flapCoolDown;
 	}
 
 	private void Swoop()
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
 
 	private void SetSprite(Sprite sprite)
 	{
-		if (localRenderer != null && sprite != null)
+		if (localRenderer != null && sprite != null && localRenderer.sprite != sprite)
 		{
 			localRenderer.sprite = sprite;
 		}
