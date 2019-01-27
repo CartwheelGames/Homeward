@@ -8,14 +8,36 @@ public class PlayUI : MonoBehaviour
 	public Text winnerLabel;
 	public Text scoreLabel1;
 	public Text scoreLabel2;
-	public Text name1;
-	public Text name2;
-	public Text name3;
+	public CanvasGroup tutorialGroup;
+	public float tutorialFadeDelay = 3f;
 
-	private void Awake()
+	private void Awake ()
 	{
 		matchManager.OnNewScore += RefreshScore;
 		matchManager.OnPlayerWin += OnPlayerWin;
+	}
+
+	private void Start ()
+	{
+		if (tutorialGroup != null)
+		{
+			StartCoroutine(FadeTutorial());
+		}
+	}
+
+	private IEnumerator FadeTutorial ()
+	{
+		yield return new WaitForSeconds(tutorialFadeDelay);
+
+		while (tutorialGroup.alpha > 0)
+		{
+			tutorialGroup.alpha -= Time.deltaTime;
+
+			yield return null;
+		}
+
+		Destroy(tutorialGroup.gameObject);
+
 	}
 
 	private void OnPlayerWin(int playerIndex)
