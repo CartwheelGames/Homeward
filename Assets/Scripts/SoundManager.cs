@@ -10,6 +10,14 @@ public class SoundManager : MonoBehaviour
 	public AudioClip scoreClip;
 	public AudioClip spawnPiece;
 
+	private void Start()
+	{
+		if (FindObjectOfType<AudioListener>() == null)
+		{
+			gameObject.AddComponent<AudioListener>();
+		}
+	}
+
 	public void PlayClashClip()
 	{
 		if (clashClip != null)
