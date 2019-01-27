@@ -47,3 +47,4 @@ Assets/AstarPathfindingProject/
 *.blend1.meta
 *.blend2.meta
 .vs/
+.vscode/

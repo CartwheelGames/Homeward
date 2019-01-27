@@ -1,26 +1,46 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+	private bool isInMatch;
+	public event Action OnMatchBeginEvent;
+	public event Action OnMatchEndEvent;
 
-	public State state = State.MENU;
-
-	public enum State
+	public void BeginMatch()
 	{
-		MENU, PRE_GAME, GAME, GAME_OVER
-	};
-
-	private void Start () 
-	{
-		
+		if (OnMatchBeginEvent != null)
+		{
+			OnMatchBeginEvent();
+		}
+		SceneManager.LoadScene(1, LoadSceneMode.Additive);
+		isInMatch = true;
 	}
-	
-	private void Update () 
+
+	public void EndMatch()
 	{
-		
+		if (OnMatchEndEvent != null)
+		{
+			OnMatchEndEvent();
+		}
+		SceneManager.UnloadSceneAsync(1);
+		isInMatch = false;
 	}
 
-	private void LoadScene ()
+	private void Update()
 	{
-		
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (isInMatch)
+			{
+				EndMatch();
+			}
+			else
+			{
+				Application.Quit();
+			}
+		}
 	}
 }

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1; 
 	public bool isFacingLeft;
-	public event Action<int> OnScoreChange;
+	public event Action OnScoreChange;
 	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
 			// DISPATCH EVENT
 			if (OnScoreChange != null)
 			{
-				OnScoreChange(score);
+				OnScoreChange();
 			}
 
 			// DELETE NEST PIECE
