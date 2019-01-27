@@ -49,7 +49,7 @@ public class MatchManager : MonoBehaviour
 		{
 			OnNewScore(playerOneScore, playerTwoScore);
 		}
-		if (!isWinnerDeclared && playerOneScore >= maxScore || playerTwoScore >= maxScore)
+		if (!isWinnerDeclared && (playerOneScore >= maxScore || playerTwoScore >= maxScore))
 		{
 			if (OnPlayerWin != null)
 			{

@@ -252,6 +252,8 @@ MonoBehaviour:
   levelExtents: 7
   nest: {fileID: 0}
   beakObject: {fileID: 4455193339990004}
+  nameLabel: {fileID: 102055815285657612}
+  nameLabelFadeDelay: 3
   localRenderer: {fileID: 212908559173996658}
 --- !u!212 &212908559173996658
 SpriteRenderer:

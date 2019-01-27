@@ -231,6 +231,7 @@ MonoBehaviour:
   scoreLabel1: {fileID: 1800059565}
   scoreLabel2: {fileID: 598790799}
   tutorialGroup: {fileID: 1312668789}
+  tutorialFadeDelay: 3
 --- !u!1 &108129547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1629,11 @@ Prefab:
       propertyPath: m_Text
       value: Nestephan
       objectReference: {fileID: 0}
+    - target: {fileID: 102055815285657612, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4286085144
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}
   m_IsPrefabParent: 0
@@ -1825,6 +1831,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1800059562}
+--- !u!1001 &1907472577
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286315327565938, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 47f5694db9b137c459387e18b8fa3e40, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1995422563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,6 +2038,11 @@ Prefab:
       propertyPath: nest
       value: 
       objectReference: {fileID: 324251877}
+    - target: {fileID: 102055815285657612, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4278716815
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}
   m_IsPrefabParent: 0
