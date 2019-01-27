@@ -250,7 +250,8 @@ MonoBehaviour:
   flapSprite2: {fileID: 21300000, guid: 7713c9ce1d17aea49b048b97ed4c9ff3, type: 3}
   stunnedSprite: {fileID: 21300000, guid: ad4dfdbba8d9c9946b5015380dcadc84, type: 3}
   groundedSprite: {fileID: 21300000, guid: 94716dc43c2ac644c95650d640972508, type: 3}
-  levelExtents: 7
+  levelExtents: 8
+  winElements: {fileID: 0}
   nest: {fileID: 0}
   beakObject: {fileID: 4455193339990004}
   nameLabel: {fileID: 102055815285657612}
