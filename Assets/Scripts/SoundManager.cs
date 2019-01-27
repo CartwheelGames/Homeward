@@ -22,7 +22,7 @@ public class SoundManager : MonoBehaviour
 	{
 		if (clashClip != null)
 		{
-			source.PlayOneShot(clashClip);
+			source.PlayOneShot(clashClip, 0.2f);
 		}
 	}
 

@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
 		float scaleX = Mathf.Abs(localRenderer.transform.localScale.x) * (isLeft ? -1 : 1);
 		float scaleY = localRenderer.transform.localScale.y;
 
-		localRenderer.transform.localScale = new Vector2(scaleX, scaleY);
+		localRenderer.transform.localScale = new Vector3(scaleX, scaleY, 1);
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
