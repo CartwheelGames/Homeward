@@ -8,6 +8,9 @@ public class PlayUI : MonoBehaviour
 	public Text winnerLabel;
 	public Text scoreLabel1;
 	public Text scoreLabel2;
+	public Text name1;
+	public Text name2;
+	public Text name3;
 
 	private void Awake()
 	{
