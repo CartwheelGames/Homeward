@@ -160,6 +160,11 @@ MonoBehaviour:
   flapCoolDown: 0.1
   stunnedDuration: 1
   isFacingLeft: 0
+  flapSprite1: {fileID: 21300000, guid: 1ce9ece9fb6b6634cb80b75a3506920a, type: 3}
+  flapSprite2: {fileID: 21300000, guid: 0e5290a7a0727c54994be114fac61c20, type: 3}
+  stunnedSprite: {fileID: 21300000, guid: 96c43338cbd35924eaa47d17ffd3cd7a, type: 3}
+  groundedSprite: {fileID: 21300000, guid: 46b4e55b8b2d92c41aaa705312c5a2be, type: 3}
+  levelExtents: 7
   nest: {fileID: 0}
   beakObject: {fileID: 4455193339990004}
   localRenderer: {fileID: 212908559173996658}

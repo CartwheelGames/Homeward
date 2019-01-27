@@ -11,13 +11,14 @@ public class Player : MonoBehaviour
 	public float flyingPower = 1;
 	public float walkingPower = 1;
 	public float flapCoolDown = 0.1f;
-	public float stunnedDuration = 1; 
+	public float stunnedDuration = 1;
 	public bool isFacingLeft;
+	public Sprite flapSprite1, flapSprite2, stunnedSprite, groundedSprite;
+	public int levelExtents = 7;
 	public event Action OnScoreChange;
 	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
-	public const int levelExtents = 7;
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
@@ -27,14 +28,14 @@ public class Player : MonoBehaviour
 		GROUNDED, FLYING, STUNNED
 	};
 
-	private void Start () 
+	private void Start()
 	{
 		localRigidBody = GetComponent<Rigidbody2D>();
 
 		Flip(isFacingLeft);
 	}
-	
-	private void Update ()
+
+	private void Update()
 	{
 		switch (state)
 		{
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
 		WrapWalls();
 	}
 
-	private void WalkUpdate ()
+	private void WalkUpdate()
 	{
 		bool isPressingLeft = Input.GetKey(leftInput);
 		bool isPressingRight = Input.GetKey(rightInput);
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void FlyUpdate ()
+	private void FlyUpdate()
 	{
 		if (Input.GetKeyDown(upInput))
 		{
@@ -85,16 +86,20 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void Flap ()
+	private void Flap()
 	{
 		Vector2 force = Vector2.up * flapPower;
 
 		MoveForward();
-
+		if (localRenderer != null)
+		{
+			Sprite nextSprite = localRenderer.sprite == flapSprite1 ? flapSprite2 : flapSprite1;
+			SetSprite(nextSprite);
+		}
 		localRigidBody.AddForce(force);
 	}
 
-	private void Swoop ()
+	private void Swoop()
 	{
 		Vector2 force = Vector2.down * swoopPower;
 
@@ -103,14 +108,22 @@ public class Player : MonoBehaviour
 		localRigidBody.AddForce(force);
 	}
 
-	private void Ground ()
+	private void Ground()
 	{
-		// SWITCH TO GROUNDED ANIMATION
+		SetSprite(groundedSprite);
 	}
 
-	private void Stun ()
+	private void SetSprite(Sprite sprite)
 	{
-		// SWITCH TO STUN ANIMATION
+		if (localRenderer != null && sprite != null)
+		{
+			localRenderer.sprite = sprite;
+		}
+	}
+
+	private void Stun()
+	{
+		SetSprite(stunnedSprite);
 
 		if (currentNestPiece != null)
 		{
@@ -122,12 +135,11 @@ public class Player : MonoBehaviour
 
 	private void StopStun()
 	{
-		// SWITCH TO FLAP ANIMATION
-
+		SetSprite(flapSprite1);
 		SetState(State.FLYING);
 	}
 
-	private void MoveForward ()
+	private void MoveForward()
 	{
 		float power = state == State.FLYING ? flyingPower : walkingPower;
 		Vector2 force = (isFacingLeft ? Vector2.left : Vector2.right) * power;
@@ -136,7 +148,7 @@ public class Player : MonoBehaviour
 		localRigidBody.AddForce(force, ForceMode2D.Force);
 	}
 
-	private void Flip (bool isLeft)
+	private void Flip(bool isLeft)
 	{
 		float scaleX = Mathf.Abs(localRenderer.transform.localScale.x) * (isLeft ? -1 : 1);
 		float scaleY = localRenderer.transform.localScale.y;
@@ -176,7 +188,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void HandlePlayerCollision (Collision2D target)
+	private void HandlePlayerCollision(Collision2D target)
 	{
 		Player otherPlayer = target.collider.gameObject.GetComponent<Player>();
 
@@ -193,7 +205,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void SetState (State newState)
+	private void SetState(State newState)
 	{
 		switch (newState)
 		{
@@ -214,7 +226,7 @@ public class Player : MonoBehaviour
 		state = newState;
 	}
 
-	private void PickupNestPiece (Collider2D target)
+	private void PickupNestPiece(Collider2D target)
 	{
 		NestPiece targetPiece = target.gameObject.GetComponentInParent<NestPiece>();
 
@@ -226,7 +238,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void DepositNestPiece (Collider2D target)
+	private void DepositNestPiece(Collider2D target)
 	{
 		Transform targetNest = target.transform;
 
@@ -247,7 +259,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void WrapWalls ()
+	private void WrapWalls()
 	{
 		if (localRigidBody.position.x < -levelExtents)
 		{
