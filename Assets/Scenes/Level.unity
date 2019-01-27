@@ -1080,11 +1080,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
---- !u!4 &995696021 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4043990426594210, guid: 6d116e4e89d834f94aa153e7cb24a5f6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1995381787}
 --- !u!1 &1059958285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,49 +1524,40 @@ Prefab:
       propertyPath: m_Name
       value: Right Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1478967549441458, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: flapSprite1
+      value: 
+      objectReference: {fileID: 21300000, guid: c3fb9c6900a54e74abd7845413d11f0c,
+        type: 3}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: flapSprite2
+      value: 
+      objectReference: {fileID: 21300000, guid: 81a7ec4c07c782f4cbe0b5451520ef00,
+        type: 3}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: groundedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 81a7ec4c07c782f4cbe0b5451520ef00,
+        type: 3}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: stunnedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0b68062a5fb13a4a8d1ffec75b245b7,
+        type: 3}
+    - target: {fileID: 212908559173996658, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c3fb9c6900a54e74abd7845413d11f0c,
+        type: 3}
     - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
         type: 2}
       propertyPath: isFacingLeft
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: state
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: leftInput
-      value: 276
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: rightInput
-      value: 275
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: upInput
-      value: 273
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: downInput
-      value: 274
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: nest
-      value: 
-      objectReference: {fileID: 995696021}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: levelBounds
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}

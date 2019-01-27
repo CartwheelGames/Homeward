@@ -95,7 +95,6 @@ public class Player : MonoBehaviour
 
 	private void Flap()
 	{
-
 		Vector2 force = Vector2.up * flapPower;
 		MoveForward();
 		SetSprite(flapSprite2);
@@ -112,7 +111,7 @@ public class Player : MonoBehaviour
 		localRigidBody.AddForce(force);
 	}
 
-	private void Ground()
+	private void Idle()
 	{
 		SetSprite(groundedSprite);
 	}
@@ -215,26 +214,22 @@ public class Player : MonoBehaviour
 
 	private void SetState(State newState)
 	{
-		if (state != newState)
+		switch (newState)
 		{
+			case State.IDLE:
+				Idle();
+				break;
 
-			switch (newState)
-			{
-				case State.IDLE:
-					Ground();
-					break;
+			case State.FLYING:
+				Flap(); // flap on state enter
+				break;
 
-				case State.FLYING:
-					Flap(); // flap on state enter
-					break;
-
-				case State.STUNNED:
-					Stun();
-					stunEndTime = Time.time + stunnedDuration;
-					break;
-			}
-			state = newState;
+			case State.STUNNED:
+				Stun();
+				stunEndTime = Time.time + stunnedDuration;
+				break;
 		}
+		state = newState;
 	}
 
 	private void PickupNestPiece(Collider2D target)
