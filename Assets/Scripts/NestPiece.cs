@@ -24,7 +24,7 @@ public class NestPiece : MonoBehaviour
 		}
 	}
 
-	public void SetHeld (Transform holder)
+	public void SetHeld(Transform holder)
 	{
 		isHeld = true;
 
@@ -34,13 +34,14 @@ public class NestPiece : MonoBehaviour
 
 		// REMOVE COLLIDER
 		localCollider.enabled = false;
+		localTriggerCollider.enabled = false;
 
 		// REMOVE PHYSICS
 		localRigidBody.isKinematic = true;
 		localRigidBody.velocity = Vector2.zero;
 	}
 
-	public void IsDropped ()
+	public void IsDropped()
 	{
 		isHeld = false;
 
@@ -49,6 +50,7 @@ public class NestPiece : MonoBehaviour
 
 		// ADD COLLIDER
 		localCollider.enabled = true;
+		localTriggerCollider.enabled = true;
 
 		// ADD PHYSICS
 		localRigidBody.isKinematic = false;

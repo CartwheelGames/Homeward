@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2823a34a448704901841ce0a5e6096ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localTriggerCollider: {fileID: 0}
+  localTriggerCollider: {fileID: 58709517848510972}
 --- !u!212 &212340534355749348
 SpriteRenderer:
   m_ObjectHideFlags: 1
