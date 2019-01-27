@@ -4,13 +4,15 @@ public class Player : MonoBehaviour
 {
 	public State state = State.FLYING;
 	public KeyCode leftInput, rightInput, upInput, downInput;
+	public int score = 0;
 	public float flapPower = 10;
 	public float swoopPower = 10;
 	public float forwardPower = 1;
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1; 
-	public Transform beakObject;
 	public bool isFacingLeft;
+	public Nest nest;
+	public Transform beakObject;
 	public SpriteRenderer localRenderer;
 	private Animator localAnimator;
 	private Rigidbody2D localRigidBody;
@@ -140,20 +142,33 @@ public class Player : MonoBehaviour
 				case "player":
 					HandlePlayerCollision(collision);
 					break;
+			}
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D target)
+	{
+		if (state == State.FLYING || state == State.IDLE)
+		{
+			switch (target.gameObject.tag)
+			{
 				case "nestPiece":
-					PickupNestPiece(collision);
+					PickupNestPiece(target);
+					break;
+				case "nest":
+					DepositNestPiece(target);
 					break;
 			}
 		}
 	}
 
-	private void HandlePlayerCollision (Collision2D collision)
+	private void HandlePlayerCollision (Collision2D target)
 	{
-		Player otherPlayer = collision.collider.gameObject.GetComponent<Player>();
+		Player otherPlayer = target.collider.gameObject.GetComponent<Player>();
 
 		if (otherPlayer != null 
-		    && otherPlayer.state == State.FLYING 
-		    && state == State.FLYING
+		    && otherPlayer.state != State.STUNNED 
+		    && state != State.STUNNED
 		    && otherPlayer.transform.position.y > transform.position.y)
 		{
 			SetState(State.STUNNED);
@@ -176,15 +191,29 @@ public class Player : MonoBehaviour
 		state = newState;
 	}
 
-	private void PickupNestPiece (Collision2D collision)
+	private void PickupNestPiece (Collider2D target)
 	{
-		NestPiece targetPiece = collision.collider.gameObject.GetComponent<NestPiece>();
-		Debug.Log(targetPiece);
+		NestPiece targetPiece = target.gameObject.GetComponentInParent<NestPiece>();
 		if (targetPiece != null && currentNestPiece == null)
 		{
 			targetPiece.SetHeld(beakObject);
 
 			currentNestPiece = targetPiece;
+		}
+	}
+
+	private void DepositNestPiece (Collider2D target)
+	{
+		Nest targetNest = target.gameObject.GetComponent<Nest>();
+
+		if (targetNest != null && nest == targetNest && currentNestPiece != null)
+		{
+			// INCREMENT SCORE
+			score++;
+
+			// DELETE NEST PIECE
+			Destroy(currentNestPiece);
+			currentNestPiece = null;
 		}
 	}
 }

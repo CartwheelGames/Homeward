@@ -1,14 +1,20 @@
 ﻿using UnityEngine;
+using System;
 
-public class Nest : MonoBehaviour {
+public class Nest : MonoBehaviour
+{
+	public event Action onScore;
 
-	void Start ()
+	private void OnTriggerEnter(Collider other)
 	{
-		
-	}
-	
-	void Update () 
-	{
-		
+		//if (other.gameObject.tag == "player")
+		//{
+		//	if (onScore != null)
+		//	{
+		//		onScore();
+
+		//		Destroy(other.gameObject);
+		//	}
+		//}
 	}
 }
