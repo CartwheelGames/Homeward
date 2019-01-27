@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
-	private const int levelExtents = 7;
+	private const int levelExtents = 9;
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
@@ -239,13 +239,13 @@ public class Player : MonoBehaviour
 
 	private void WrapWalls ()
 	{
-		if (transform.position.x < -levelExtents)
+		if (localRigidBody.position.x < -levelExtents)
 		{
-			transform.position = new Vector2(levelExtents - 1, transform.position.y);
+			localRigidBody.position = new Vector2(levelExtents - 1, localRigidBody.position.y);
 		}
-		else if (transform.position.x > levelExtents)
+		else if (localRigidBody.position.x > levelExtents)
 		{
-			transform.position = new Vector2(-levelExtents + 1, transform.position.y);
+			localRigidBody.position = new Vector2(-levelExtents + 1, localRigidBody.position.y);
 		}
 	}
 }

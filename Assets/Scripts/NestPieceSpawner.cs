@@ -5,18 +5,18 @@ public class NestPieceSpawner : MonoBehaviour
 	[Range(1, 10)] public int maxOnScreen = 1;
 	public GameObject nestPiecePrefab;
 	public const float spawnWidth = 5;
-	public float spawnInterval = 1;
-	private int numOnScreen = 0;
+	public float spawnIntervalMinimum = 1;
+	public float spawnIntervalRandom = 1;
+	private int count = 0;
 	private float spawnTimer = 0;
 	  
 	private void Update ()
 	{
-		if (spawnTimer <= 0 && numOnScreen < maxOnScreen)
+		if (spawnTimer <= 0 && count < maxOnScreen)
 		{
 			Spawn();
-			spawnTimer = spawnInterval;
+			spawnTimer = spawnIntervalMinimum + (Random.value * spawnIntervalRandom);
 		}
-
 		spawnTimer -= Time.deltaTime;
 	}
 
@@ -34,11 +34,11 @@ public class NestPieceSpawner : MonoBehaviour
 			nestPiece.transform.position = new Vector2(newX, newY);
 
 			// INCREMENT COUNT
-			numOnScreen++;
+			count++;
 
 
 			// DECREMENT COUNT ON REMOVE
-			nestPiece.OnRemoved += () => numOnScreen--;
+			nestPiece.OnRemoved += () => count--;
 		}
 	}
 }
