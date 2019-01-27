@@ -168,7 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f515838f01a4438cbd1544312f6edf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSprites: []
+  progressSprites:
+  - {fileID: 21300000, guid: 682ff6221eceb56419137ce973b0bf98, type: 3}
+  - {fileID: 21300000, guid: 10ef136832fd94e4fa1a8252912986f0, type: 3}
+  - {fileID: 21300000, guid: e328c3dbf13e8b24884b00b4108d109c, type: 3}
+  - {fileID: 21300000, guid: 96486ff1e00beb54f8ecbf966de6335e, type: 3}
 --- !u!212 &212193289160695228
 SpriteRenderer:
   m_ObjectHideFlags: 1

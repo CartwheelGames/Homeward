@@ -19,16 +19,29 @@ public class MatchManager : MonoBehaviour
 		gameManager = FindObjectOfType<GameManager>();
 		if (playerOne != null)
 		{
-			playerOne.OnScoreChange += OnPlayerScored;
+			playerOne.OnScoreChange += OnPlayerOneScored;
 		}
 		if (playerTwo != null)
 		{
-			playerTwo.OnScoreChange += OnPlayerScored;
+			playerTwo.OnScoreChange += OnPlayerTwoScored;
 		}
 	}
 
-	private void OnPlayerScored()
+	private void OnPlayerOneScored()
 	{
+		OnPlayerScored(playerOne);
+	}
+
+	private void OnPlayerTwoScored()
+	{
+		OnPlayerScored(playerTwo);
+	}
+
+	private void OnPlayerScored(Player player)
+	{
+		// UPDATE NEST VISUALS
+		player.nest.GetComponent<Nest>().SetProgress(player.score / maxScore);
+
 		int playerOneScore = playerOne != null ? playerOne.score : 0;
 		int playerTwoScore = playerTwo != null ? playerTwo.score : 0;
 		if (OnNewScore != null)
