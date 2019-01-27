@@ -57,6 +57,7 @@ public class MatchManager : MonoBehaviour
 				int winnerIndex = playerOneScore > playerTwoScore ? 1 : 2;
 				OnPlayerWin(winnerIndex);
 			}
+			player.ShowWinElements();
 			StartCoroutine(TransitionToEndMatch());
 			isWinnerDeclared = true;
 			if (soundManager != null)

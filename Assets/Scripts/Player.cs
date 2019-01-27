@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 	public Sprite flapSprite1, flapSprite2, stunnedSprite, groundedSprite;
 	public int levelExtents = 7;
 	public event Action OnScoreChange;
+	public GameObject winElements;
 	public Transform nest;
 	public Transform beakObject;
 	public TextMesh nameLabel;
@@ -34,6 +35,11 @@ public class Player : MonoBehaviour
 	{
 		IDLE, FLYING, STUNNED
 	};
+
+	public void ShowWinElements()
+	{
+		winElements.SetActive(true);
+	}
 
 	private void Start()
 	{
