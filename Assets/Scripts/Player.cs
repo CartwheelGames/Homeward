@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class Player : MonoBehaviour
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1; 
 	public bool isFacingLeft;
-	public Nest nest;
+	public event Action<int> OnScoreChange;
+	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
 	private Animator localAnimator;
@@ -21,7 +23,7 @@ public class Player : MonoBehaviour
 
 	public enum State
 	{
-		IDLE, WALKING, FLYING, STUNNED
+		GROUNDED, FLYING, STUNNED
 	};
 
 	private void Start () 
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
 	{
 		switch (state)
 		{
-			case State.IDLE:
+			case State.GROUNDED:
 			case State.FLYING:
 				ApplyInput();
 				break;
@@ -74,11 +76,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void ApplyFlapInput()
-	{
-		
-	}
-
 	private void Flap ()
 	{
 		Vector2 force = Vector2.up * flapPower;
@@ -93,9 +90,9 @@ public class Player : MonoBehaviour
 		localRigidBody.AddForce(force);
 	}
 
-	private void Idle ()
+	private void Ground ()
 	{
-		// SWITCH TO IDLE ANIMATION
+		// SWITCH TO GROUNDED ANIMATION
 	}
 
 	private void Stun ()
@@ -126,18 +123,20 @@ public class Player : MonoBehaviour
 
 	private void Flip (bool isLeft)
 	{
-		float newScaleX = Mathf.Abs(localRenderer.transform.localScale.x) * (isLeft ? -1 : 1);
-		localRenderer.transform.localScale = new Vector2(newScaleX, localRenderer.transform.localScale.y);
+		float scaleX = Mathf.Abs(localRenderer.transform.localScale.x) * (isLeft ? -1 : 1);
+		float scaleY = localRenderer.transform.localScale.y;
+
+		localRenderer.transform.localScale = new Vector2(scaleX, scaleY);
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (state == State.FLYING || state == State.IDLE)
+		if (state == State.FLYING || state == State.GROUNDED)
 		{
 			switch (collision.collider.gameObject.tag)
 			{
 				case "ground":
-					SetState(State.IDLE);
+					SetState(State.GROUNDED);
 					break;
 				case "player":
 					HandlePlayerCollision(collision);
@@ -148,7 +147,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D target)
 	{
-		if (state == State.FLYING || state == State.IDLE)
+		if (state == State.FLYING || state == State.GROUNDED)
 		{
 			switch (target.gameObject.tag)
 			{
@@ -166,12 +165,16 @@ public class Player : MonoBehaviour
 	{
 		Player otherPlayer = target.collider.gameObject.GetComponent<Player>();
 
-		if (otherPlayer != null 
-		    && otherPlayer.state != State.STUNNED 
-		    && state != State.STUNNED
-		    && otherPlayer.transform.position.y > transform.position.y)
+		if (otherPlayer != null)
 		{
-			SetState(State.STUNNED);
+			bool neitherPlayerIsStunned = otherPlayer.state != State.STUNNED && state != State.STUNNED;
+			bool otherPlayerisAbove = otherPlayer.transform.position.y > transform.position.y;
+
+
+			if (neitherPlayerIsStunned && otherPlayerisAbove)
+			{
+				SetState(State.STUNNED);
+			}
 		}
 	}
 
@@ -179,8 +182,8 @@ public class Player : MonoBehaviour
 	{
 		switch (newState)
 		{
-			case State.IDLE:
-				Idle();
+			case State.GROUNDED:
+				Ground();
 				break;
 			case State.STUNNED:
 				Stun();
@@ -194,6 +197,7 @@ public class Player : MonoBehaviour
 	private void PickupNestPiece (Collider2D target)
 	{
 		NestPiece targetPiece = target.gameObject.GetComponentInParent<NestPiece>();
+
 		if (targetPiece != null && currentNestPiece == null)
 		{
 			targetPiece.SetHeld(beakObject);
@@ -204,12 +208,18 @@ public class Player : MonoBehaviour
 
 	private void DepositNestPiece (Collider2D target)
 	{
-		Nest targetNest = target.gameObject.GetComponent<Nest>();
+		Transform targetNest = target.transform;
 
 		if (targetNest != null && nest == targetNest && currentNestPiece != null)
 		{
 			// INCREMENT SCORE
 			score++;
+
+			// DISPATCH EVENT
+			if (OnScoreChange != null)
+			{
+				OnScoreChange(score);
+			}
 
 			// DELETE NEST PIECE
 			Destroy(currentNestPiece);

@@ -4,6 +4,7 @@ public class NestPiece : MonoBehaviour
 {
 
 	public bool isHeld { get; private set; }
+	public Collider2D localTriggerCollider;
 	private Collider2D localCollider;
 	private Rigidbody2D localRigidBody;
 
