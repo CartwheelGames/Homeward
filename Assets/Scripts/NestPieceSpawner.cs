@@ -31,7 +31,7 @@ public class NestPieceSpawner : MonoBehaviour
 		{
 			// RANDOMIZE POSITION
 			float newX = Random.value * spawnWidth  - (spawnWidth/2);
-			float newY = nestPiece.transform.position.y;
+			float newY = transform.position.y;
 			float rotation = Random.value * 360f;
 
 			nestPiece.transform.position = new Vector2(newX, newY);
