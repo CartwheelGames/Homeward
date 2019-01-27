@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
 	public event Action OnScoreChange;
 	public Transform nest;
 	public Transform beakObject;
+	public TextMesh nameLabel;
+	public float nameLabelFadeDelay = 3f;
 	public SpriteRenderer localRenderer;
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
@@ -36,6 +39,24 @@ public class Player : MonoBehaviour
 		localRigidBody = GetComponent<Rigidbody2D>();
 
 		Flip(isFacingLeft);
+
+		if (nameLabel != null)
+		{
+			StartCoroutine(FadeNameLabel());
+		}
+	}
+
+	private IEnumerator FadeNameLabel()
+	{
+		yield return new WaitForSeconds(nameLabelFadeDelay);
+		Color color = nameLabel.color;
+		while (nameLabel.color.a > 0)
+		{
+			float alpha = nameLabel.color.a - Time.deltaTime;
+			nameLabel.color = new Color(color.r, color.g, color.b, alpha);
+			yield return null;
+		}
+		Destroy(nameLabel);
 	}
 
 	private void Update()
