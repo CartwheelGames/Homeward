@@ -3,13 +3,14 @@ using System;
 
 public class Player : MonoBehaviour
 {
-	public State state = State.GROUNDED;
+	public State state = State.IDLE;
 	public KeyCode leftInput, rightInput, upInput, downInput;
 	public int score = 0;
 	public float flapPower = 10;
 	public float swoopPower = 10;
 	public float flyingPower = 1;
 	public float walkingPower = 1;
+	public float stunBouncePower = 10;
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1;
 	public bool isFacingLeft;
@@ -23,10 +24,11 @@ public class Player : MonoBehaviour
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
 	private float flapEndTime;
+	private bool isGrounded;
 
 	public enum State
 	{
-		GROUNDED, FLYING, STUNNED
+		IDLE, FLYING, STUNNED
 	};
 
 	private void Start()
@@ -40,7 +42,7 @@ public class Player : MonoBehaviour
 	{
 		switch (state)
 		{
-			case State.GROUNDED:
+			case State.IDLE:
 				WalkUpdate();
 				break;
 
@@ -160,23 +162,33 @@ public class Player : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (state == State.FLYING || state == State.GROUNDED)
+		switch (collision.collider.gameObject.tag)
 		{
-			switch (collision.collider.gameObject.tag)
-			{
-				case "ground":
-					SetState(State.GROUNDED);
-					break;
-				case "player":
+			case "ground":
+				isGrounded = true;
+				SetState(State.IDLE);
+				break;
+			case "Player":
+				if (state != State.STUNNED)
+				{
 					HandlePlayerCollision(collision);
-					break;
-			}
+				}
+				break;
+		}
+	}
+
+	private void OnCollisionLeave2D(Collision2D collision)
+	{
+		if (isGrounded && collision.collider.gameObject.tag == "ground")
+		{
+			isGrounded = false;
+			SetState(State.FLYING);
 		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D target)
 	{
-		if (state == State.FLYING || state == State.GROUNDED)
+		if (state == State.FLYING || state == State.IDLE)
 		{
 			switch (target.gameObject.tag)
 			{
@@ -193,39 +205,36 @@ public class Player : MonoBehaviour
 	private void HandlePlayerCollision(Collision2D target)
 	{
 		Player otherPlayer = target.collider.gameObject.GetComponent<Player>();
-
 		if (otherPlayer != null)
 		{
-			bool neitherPlayerIsStunned = otherPlayer.state != State.STUNNED && state != State.STUNNED;
-			bool otherPlayerisAbove = otherPlayer.transform.position.y > transform.position.y;
-
-
-			if (neitherPlayerIsStunned && otherPlayerisAbove)
-			{
-				SetState(State.STUNNED);
-			}
+			Vector2 bounceVector = (localRigidBody.position - target.contacts[0].point).normalized;
+			localRigidBody.AddForce(bounceVector * stunBouncePower);
+			SetState(State.STUNNED);
 		}
 	}
 
 	private void SetState(State newState)
 	{
-		switch (newState)
+		if (state != newState)
 		{
-			case State.GROUNDED:
-				Ground();
-				break;
 
-			case State.FLYING:
-				Flap(); // flap on state enter
-				break;
+			switch (newState)
+			{
+				case State.IDLE:
+					Ground();
+					break;
 
-			case State.STUNNED:
-				Stun();
-				stunEndTime = Time.time + stunnedDuration;
-				break;
+				case State.FLYING:
+					Flap(); // flap on state enter
+					break;
+
+				case State.STUNNED:
+					Stun();
+					stunEndTime = Time.time + stunnedDuration;
+					break;
+			}
+			state = newState;
 		}
-
-		state = newState;
 	}
 
 	private void PickupNestPiece(Collider2D target)

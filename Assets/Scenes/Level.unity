@@ -2095,11 +2095,6 @@ Prefab:
       propertyPath: nest
       value: 
       objectReference: {fileID: 324251877}
-    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
-        type: 2}
-      propertyPath: levelBounds
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}
   m_IsPrefabParent: 0
