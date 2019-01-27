@@ -6,9 +6,10 @@ public class Player : MonoBehaviour
 {
 	public State state = State.IDLE;
 	public KeyCode leftInput, rightInput, upInput, downInput;
+	public SoundManager soundManager;
 	public int score = 0;
 	public float flapPower = 10;
-	public float swoopPower = 10;
+	public float divePower = 10;
 	public float flyingPower = 1;
 	public float walkingPower = 1;
 	public float stunBouncePower = 10;
@@ -56,7 +57,6 @@ public class Player : MonoBehaviour
 			nameLabel.color = new Color(color.r, color.g, color.b, alpha);
 			yield return null;
 		}
-		Destroy(nameLabel);
 	}
 
 	private void Update()
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
 			}
 			else if (Input.GetKeyDown(downInput))
 			{
-				Swoop();
+				Dive();
 			}
 		}
 	}
@@ -121,15 +121,18 @@ public class Player : MonoBehaviour
 		SetSprite(flapSprite2);
 		localRigidBody.AddForce(force);
 		flapEndTime = Time.time + flapCoolDown;
+		soundManager.PlayFlapClip();
 	}
 
-	private void Swoop()
+	private void Dive()
 	{
-		Vector2 force = Vector2.down * swoopPower;
+		Vector2 force = Vector2.down * divePower;
 
 		MoveForward();
 
 		localRigidBody.AddForce(force);
+
+		soundManager.PlayDiveClip();
 	}
 
 	private void Idle()
@@ -237,6 +240,10 @@ public class Player : MonoBehaviour
 			Vector2 bounceVector = (localRigidBody.position - target.contacts[0].point).normalized;
 			localRigidBody.AddForce(bounceVector * stunBouncePower);
 			SetState(State.STUNNED);
+			if (otherPlayer.state != State.STUNNED)
+			{
+				soundManager.PlayClashClip();
+			}
 		}
 	}
 
@@ -269,6 +276,10 @@ public class Player : MonoBehaviour
 			targetPiece.SetHeld(beakObject);
 
 			currentNestPiece = targetPiece;
+			if (soundManager != null)
+			{
+				soundManager.PlaySpawnPieceClip();
+			}
 		}
 	}
 
@@ -280,12 +291,13 @@ public class Player : MonoBehaviour
 		{
 			// INCREMENT SCORE
 			score++;
-
 			// DISPATCH EVENT
 			if (OnScoreChange != null)
 			{
 				OnScoreChange();
 			}
+
+			soundManager.PlayScoreClip();
 
 			// DELETE NEST PIECE
 			Destroy(currentNestPiece.gameObject);

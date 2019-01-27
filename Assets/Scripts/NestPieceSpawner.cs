@@ -40,7 +40,6 @@ public class NestPieceSpawner : MonoBehaviour
 			// INCREMENT COUNT
 			count++;
 
-
 			// DECREMENT COUNT ON REMOVE
 			nestPiece.OnRemoved += () => count--;
 		}

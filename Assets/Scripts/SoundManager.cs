@@ -2,30 +2,59 @@
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
-	private static SoundManager instance;
 	public AudioSource source;
 	public AudioClip clashClip;
 	public AudioClip flapClip;
 	public AudioClip diveClip;
 	public AudioClip winClip;
-	public void Awake()
+	public AudioClip scoreClip;
+	public AudioClip spawnPiece;
+
+	public void PlayClashClip()
 	{
-		instance = this;
+		if (clashClip != null)
+		{
+			source.PlayOneShot(clashClip);
+		}
 	}
-	public static void PlayClashClip()
+
+	public void PlayFlapClip()
 	{
-		instance.source.PlayOneShot(instance.clashClip);
+		if (flapClip != null)
+		{
+			source.PlayOneShot(flapClip, 0.2f);
+		}
 	}
-	public static void PlayFlapClip()
+
+	public void PlayDiveClip()
 	{
-		instance.source.PlayOneShot(instance.flapClip);
+		if (diveClip != null)
+		{
+			source.PlayOneShot(diveClip);
+		}
 	}
-	public static void PlayDiveClip()
+
+	public void PlayWinClip()
 	{
-		instance.source.PlayOneShot(instance.diveClip);
+		if (winClip != null)
+		{
+			source.PlayOneShot(winClip);
+		}
 	}
-	public static void PlayWinClip()
+
+	public void PlayScoreClip()
 	{
-		instance.source.PlayOneShot(instance.winClip);
+		if (scoreClip != null)
+		{
+			source.PlayOneShot(scoreClip);
+		}
+	}
+	
+	public void PlaySpawnPieceClip()
+	{
+		if (scoreClip != null)
+		{
+			source.PlayOneShot(spawnPiece, 0.25f);
+		}
 	}
 }

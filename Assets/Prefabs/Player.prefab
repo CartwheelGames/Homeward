@@ -236,9 +236,10 @@ MonoBehaviour:
   rightInput: 100
   upInput: 119
   downInput: 115
+  soundManager: {fileID: 0}
   score: 0
   flapPower: 75
-  swoopPower: 200
+  divePower: 200
   flyingPower: 200
   walkingPower: 90
   stunBouncePower: 200

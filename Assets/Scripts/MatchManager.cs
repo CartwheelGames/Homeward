@@ -11,6 +11,7 @@ public class MatchManager : MonoBehaviour
 	public float timeOnEndScreen = 5f;
 	public event Action<int, int> OnNewScore;
 	public event Action<int> OnPlayerWin;
+	public SoundManager soundManager;
 	private bool isWinnerDeclared;
 	private GameManager gameManager;
 
@@ -58,6 +59,10 @@ public class MatchManager : MonoBehaviour
 			}
 			StartCoroutine(TransitionToEndMatch());
 			isWinnerDeclared = true;
+			if (soundManager != null)
+			{
+				soundManager.PlayWinClip();
+			}
 		}
 	}
 
