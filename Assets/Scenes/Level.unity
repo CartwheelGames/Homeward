@@ -1559,6 +1559,26 @@ Prefab:
       propertyPath: isFacingLeft
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: leftInput
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: rightInput
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: upInput
+      value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374175681346288, guid: 4ff9e0b54b30c48009c7efe9e58967a5,
+        type: 2}
+      propertyPath: downInput
+      value: 274
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff9e0b54b30c48009c7efe9e58967a5, type: 2}
   m_IsPrefabParent: 0
