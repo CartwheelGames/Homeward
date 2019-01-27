@@ -3,12 +3,13 @@ using System;
 
 public class Player : MonoBehaviour
 {
-	public State state = State.FLYING;
+	public State state = State.GROUNDED;
 	public KeyCode leftInput, rightInput, upInput, downInput;
 	public int score = 0;
 	public float flapPower = 10;
 	public float swoopPower = 10;
-	public float forwardPower = 1;
+	public float flyingPower = 1;
+	public float walkingPower = 1;
 	public float flapCoolDown = 0.1f;
 	public float stunnedDuration = 1; 
 	public bool isFacingLeft;
@@ -33,14 +34,18 @@ public class Player : MonoBehaviour
 		Flip(isFacingLeft);
 	}
 	
-	private void Update()
+	private void Update ()
 	{
 		switch (state)
 		{
 			case State.GROUNDED:
-			case State.FLYING:
-				ApplyInput();
+				WalkUpdate();
 				break;
+
+			case State.FLYING:
+				FlyUpdate();
+				break;
+
 			case State.STUNNED:
 				if (Time.time > stunEndTime)
 				{
@@ -52,30 +57,24 @@ public class Player : MonoBehaviour
 		WrapWalls();
 	}
 
-	private void ApplyInput ()
+	private void WalkUpdate ()
 	{
 		bool isPressingLeft = Input.GetKey(leftInput);
 		bool isPressingRight = Input.GetKey(rightInput);
 
-		if (isPressingLeft || isPressingRight)
+		if ((isPressingLeft && isFacingLeft) || (isPressingRight && !isFacingLeft))
 		{
 			MoveForward();
-
-			if (isPressingLeft)
-			{
-				if (!isFacingLeft)
-				{
-					isFacingLeft = true;
-					Flip(true);
-				}
-			}
-			else if (isPressingRight && isFacingLeft)
-			{
-				isFacingLeft = false;
-				Flip(false);
-			}
 		}
-		               
+
+		if (Input.GetKey(upInput))
+		{
+			SetState(State.FLYING);
+		}
+	}
+
+	private void FlyUpdate ()
+	{
 		if (Input.GetKeyDown(upInput))
 		{
 			Flap();
@@ -90,12 +89,16 @@ public class Player : MonoBehaviour
 	{
 		Vector2 force = Vector2.up * flapPower;
 
+		MoveForward();
+
 		localRigidBody.AddForce(force);
 	}
 
 	private void Swoop ()
 	{
 		Vector2 force = Vector2.down * swoopPower;
+
+		MoveForward();
 
 		localRigidBody.AddForce(force);
 	}
@@ -126,8 +129,10 @@ public class Player : MonoBehaviour
 
 	private void MoveForward ()
 	{
-		Vector2 force = (isFacingLeft ? Vector2.left : Vector2.right) * forwardPower;
+		float power = state == State.FLYING ? flyingPower : walkingPower;
+		Vector2 force = (isFacingLeft ? Vector2.left : Vector2.right) * power;
 
+		localRigidBody.velocity = new Vector2(0, localRigidBody.velocity.y);
 		localRigidBody.AddForce(force, ForceMode2D.Force);
 	}
 
@@ -195,6 +200,11 @@ public class Player : MonoBehaviour
 			case State.GROUNDED:
 				Ground();
 				break;
+
+			case State.FLYING:
+				Flap(); // flap on state enter
+				break;
+
 			case State.STUNNED:
 				Stun();
 				stunEndTime = Time.time + stunnedDuration;

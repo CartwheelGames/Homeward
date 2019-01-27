@@ -147,15 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f9f7caf6d6747f4869ece7d5e22151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
+  state: 0
   leftInput: 97
   rightInput: 100
   upInput: 119
   downInput: 115
   score: 0
-  flapPower: 150
+  flapPower: 200
   swoopPower: 600
-  forwardPower: 5
+  flyingPower: 200
+  walkingPower: 90
   flapCoolDown: 0.1
   stunnedDuration: 1
   isFacingLeft: 0
