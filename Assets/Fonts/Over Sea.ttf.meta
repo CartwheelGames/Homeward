@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8d0f85b0e3a5548629f0818acc6bc0ab
+timeCreated: 1484969110
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Over Sea
+  fontNames:
+  - Over Sea
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
