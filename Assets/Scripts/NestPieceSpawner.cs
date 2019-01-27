@@ -31,7 +31,11 @@ public class NestPieceSpawner : MonoBehaviour
 			// RANDOMIZE POSITION
 			float newX = Random.value * spawnWidth  - (spawnWidth/2);
 			float newY = nestPiece.transform.position.y;
+			float rotation = Random.value * 360f;
+
 			nestPiece.transform.position = new Vector2(newX, newY);
+			nestPiece.transform.eulerAngles = new Vector3(0, 0, rotation);
+			nestPiece.GetComponent<Rigidbody2D>().AddTorque(2);
 
 			// INCREMENT COUNT
 			count++;
