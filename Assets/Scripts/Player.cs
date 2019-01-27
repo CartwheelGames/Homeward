@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 	public Transform nest;
 	public Transform beakObject;
 	public SpriteRenderer localRenderer;
-	private const int levelExtents = 9;
+	public const int levelExtents = 7;
 	private Rigidbody2D localRigidBody;
 	private NestPiece currentNestPiece;
 	private float stunEndTime;
