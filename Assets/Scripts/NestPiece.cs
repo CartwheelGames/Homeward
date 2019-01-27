@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System;
 
 public class NestPiece : MonoBehaviour
 {
 
 	public bool isHeld { get; private set; }
 	public Collider2D localTriggerCollider;
+	public event Action OnRemoved;
 	private Collider2D localCollider;
 	private Rigidbody2D localRigidBody;
 
@@ -12,6 +14,14 @@ public class NestPiece : MonoBehaviour
 	{
 		localCollider = GetComponent<Collider2D>();
 		localRigidBody = GetComponent<Rigidbody2D>();
+	}
+
+	private void OnDestroy()
+	{
+		if (OnRemoved != null)
+		{
+			OnRemoved();
+		}
 	}
 
 	public void SetHeld (Transform holder)
